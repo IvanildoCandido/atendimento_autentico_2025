@@ -188,7 +188,7 @@ const messages = {
         table: {
           name: "Nome",
           whatsapp: "WhatsApp",
-          email: "Email",
+          email: "Aluno",
           actions: "Ações",
         },
       },
@@ -282,7 +282,7 @@ const messages = {
           extraInfo: "Informações adicionais",
           name: "Nome",
           number: "Número do Whatsapp",
-          email: "Email",
+          email: "Aluno",
           extraName: "Nome do campo",
           extraValue: "Valor",
           whatsapp: "Conexão Origem: "
@@ -668,7 +668,7 @@ const messages = {
           name: "Nome",
           number: "Número",
           whatsapp: "Whatsapp",
-          email: "E-mail",
+          email: "Aluno",
           okEdit: "Editar",
           okAdd: "Adicionar",
           add: "Adicionar",
@@ -679,7 +679,7 @@ const messages = {
           name: "Nome",
           number: "Número",
           whatsapp: "Whatsapp",
-          email: "E-mail",
+          email: "Aluno",
           actions: "Ações",
         },
         confirmationModal: {
