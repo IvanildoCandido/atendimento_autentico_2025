@@ -194,7 +194,7 @@ const ForwardMessageModal = ({ messages, onClose, modalOpen }) => {
 							</Typography>
 						</>
 					)}
-					<FormControlLabel
+					{/* <FormControlLabel
 						style={{ marginRight: 7, color: "gray" }}
 						label={i18n.t("messagesInput.signMessage")}
 						labelPlacement="start"
@@ -209,7 +209,7 @@ const ForwardMessageModal = ({ messages, onClose, modalOpen }) => {
 								color="primary"
 							/>
 						}
-					/>
+					/> */}
 					<ButtonWithSpinner
 						variant="contained"
 						type="button"

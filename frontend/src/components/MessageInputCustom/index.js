@@ -35,7 +35,7 @@ import { AuthContext } from "../../context/Auth/AuthContext";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import toastError from "../../errors/toastError";
 
-import Compressor from 'compressorjs';
+import Compressor from "compressorjs";
 import LinearWithValueLabel from "./ProgressBarCustom";
 
 import useQuickMessages from "../../hooks/useQuickMessages";
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
 
   ForwardMessageIcons: {
     color: grey[700],
-    transform: 'scaleX(-1)'
+    transform: "scaleX(-1)",
   },
 
   uploadInput: {
@@ -210,22 +210,23 @@ const SignSwitch = (props) => {
   const { width, setSignMessage, signMessage } = props;
   if (isWidthUp("md", width)) {
     return (
-      <FormControlLabel
-        style={{ marginRight: 7, color: "gray" }}
-        label={i18n.t("messagesInput.signMessage")}
-        labelPlacement="start"
-        control={
-          <Switch
-            size="small"
-            checked={signMessage}
-            onChange={(e) => {
-              setSignMessage(e.target.checked);
-            }}
-            name="showAllTickets"
-            color="primary"
-          />
-        }
-      />
+      <></>
+      // <FormControlLabel
+      //   style={{ marginRight: 7, color: "gray" }}
+      //   label={i18n.t("messagesInput.signMessage")}
+      //   labelPlacement="start"
+      //   control={
+      //     <Switch
+      //       size="small"
+      //       checked={signMessage}
+      //       onChange={(e) => {
+      //         setSignMessage(e.target.checked);
+      //       }}
+      //       name="showAllTickets"
+      //       color="primary"
+      //     />
+      //   }
+      // />
     );
   }
   return null;
@@ -268,21 +269,27 @@ const ActionButtons = (props) => {
     handleUploadAudio,
     handleStartRecording,
     handleOpenModalForward,
-    showSelectMessageCheckbox
+    showSelectMessageCheckbox,
   } = props;
   const classes = useStyles();
   if (inputMessage || showSelectMessageCheckbox) {
     return (
       <IconButton
-      aria-label="sendMessage"
-      component="span"
-      onClick={showSelectMessageCheckbox ? handleOpenModalForward : handleSendMessage}
-      disabled={loading}
-    >
-      {showSelectMessageCheckbox ?
-        <Reply className={classes.ForwardMessageIcons} /> : <SendIcon className={classes.sendMessageIcons} />}      </IconButton>
-  );
-} else if (recording) {
+        aria-label="sendMessage"
+        component="span"
+        onClick={
+          showSelectMessageCheckbox ? handleOpenModalForward : handleSendMessage
+        }
+        disabled={loading}
+      >
+        {showSelectMessageCheckbox ? (
+          <Reply className={classes.ForwardMessageIcons} />
+        ) : (
+          <SendIcon className={classes.sendMessageIcons} />
+        )}{" "}
+      </IconButton>
+    );
+  } else if (recording) {
     return (
       <div className={classes.recorderWrapper}>
         <IconButton
@@ -337,7 +344,7 @@ const CustomInput = (props) => {
     handleInputPaste,
     disableOption,
     handleQuickAnswersClick,
-    replyingMessage
+    replyingMessage,
   } = props;
   const classes = useStyles();
   const [quickMessages, setQuickMessages] = useState([]);
@@ -407,7 +414,6 @@ const CustomInput = (props) => {
     return i18n.t("messagesInput.placeholderClosed");
   };
 
-
   const setInputRef = (input) => {
     if (input) {
       input.focus();
@@ -432,13 +438,16 @@ const CustomInput = (props) => {
           }
         }}
         onChange={(event, opt) => {
-         
           if (isObject(opt) && has(opt, "value") && isNil(opt.mediaPath)) {
             setInputMessage(opt.value);
             setTimeout(() => {
               inputRef.current.scrollTop = inputRef.current.scrollHeight;
             }, 200);
-          } else if (isObject(opt) && has(opt, "value") && !isNil(opt.mediaPath)) {
+          } else if (
+            isObject(opt) &&
+            has(opt, "value") &&
+            !isNil(opt.mediaPath)
+          ) {
             handleQuickAnswersClick(opt);
 
             setTimeout(() => {
@@ -493,7 +502,8 @@ const MessageInputCustom = (props) => {
   const {
     selectedMessages,
     setForwardMessageModalOpen,
-    showSelectMessageCheckbox } = useContext(ForwardMessageContext);
+    showSelectMessageCheckbox,
+  } = useContext(ForwardMessageContext);
 
   useEffect(() => {
     inputRef.current.focus();
@@ -519,12 +529,12 @@ const MessageInputCustom = (props) => {
 
   const handleOpenModalForward = () => {
     if (selectedMessages.length === 0) {
-      setForwardMessageModalOpen(false)
+      setForwardMessageModalOpen(false);
       toastError(i18n.t("messagesList.header.notMessage"));
       return;
     }
     setForwardMessageModalOpen(true);
-  }
+  };
 
   const handleAddEmoji = (e) => {
     let emoji = e.native;
@@ -554,7 +564,7 @@ const MessageInputCustom = (props) => {
       const formData = new FormData();
       const filename = `${new Date().getTime()}.${extension}`;
       formData.append("medias", blob, filename);
-      formData.append("body",  message);
+      formData.append("body", message);
       formData.append("fromMe", true);
 
       await api.post(`/messages/${ticketId}`, formData);
@@ -564,7 +574,7 @@ const MessageInputCustom = (props) => {
     }
     setLoading(false);
   };
-  
+
   const handleQuickAnswersClick = async (value) => {
     if (value.mediaPath) {
       try {
@@ -593,12 +603,13 @@ const MessageInputCustom = (props) => {
     formData.append("fromMe", true);
 
     medias.forEach(async (media, idx) => {
-
       const file = media;
 
-      if (!file) { return; }
+      if (!file) {
+        return;
+      }
 
-      if (media?.type.split('/')[0] == 'image') {
+      if (media?.type.split("/")[0] == "image") {
         new Compressor(file, {
           quality: 0.7,
 
@@ -609,60 +620,43 @@ const MessageInputCustom = (props) => {
 
             formData.append("medias", media);
             formData.append("body", media.name);
-
           },
           error(err) {
-            alert('erro')
+            alert("erro");
             console.log(err.message);
           },
-
         });
       } else {
         formData.append("medias", media);
         formData.append("body", media.name);
-
       }
+    });
 
-
-    },);
-
-    setTimeout(async()=> {
-
+    setTimeout(async () => {
       try {
-        await api.post(`/messages/${ticketId}`, formData, {
-          onUploadProgress: (event) => {
-            let progress = Math.round(
-              (event.loaded * 100) / event.total
-            );
-            setPercentLoading(progress);
-            console.log(
-              `A imagem  está ${progress}% carregada... `
-            );
-          },
-        })
+        await api
+          .post(`/messages/${ticketId}`, formData, {
+            onUploadProgress: (event) => {
+              let progress = Math.round((event.loaded * 100) / event.total);
+              setPercentLoading(progress);
+              console.log(`A imagem  está ${progress}% carregada... `);
+            },
+          })
           .then((response) => {
-            setLoading(false)
-            setMedias([])
+            setLoading(false);
+            setMedias([]);
             setPercentLoading(0);
-            console.log(
-              `A imagem á foi enviada para o servidor!`
-
-            );
+            console.log(`A imagem á foi enviada para o servidor!`);
           })
           .catch((err) => {
-            console.error(
-              `Houve um problema ao realizar o upload da imagem.`
-            );
+            console.error(`Houve um problema ao realizar o upload da imagem.`);
             console.log(err);
           });
       } catch (err) {
         toastError(err);
       }
-
-
-    },2000)
-
-  }
+    }, 2000);
+  };
 
   const handleSendMessage = async () => {
     if (inputMessage.trim() === "") return;
@@ -858,4 +852,3 @@ const MessageInputCustom = (props) => {
 };
 
 export default withWidth()(MessageInputCustom);
-

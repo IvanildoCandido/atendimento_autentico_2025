@@ -415,7 +415,7 @@ const MessageInput = ({ ticketStatus }) => {
 							<AttachFileIcon className={classes.sendMessageIcons} />
 						</IconButton>
 					</label>
-					<FormControlLabel
+					{/* <FormControlLabel
 						style={{ marginRight: 7, color: "gray" }}
 						label={i18n.t("messagesInput.signMessage")}
 						labelPlacement="start"
@@ -430,7 +430,7 @@ const MessageInput = ({ ticketStatus }) => {
 								color="primary"
 							/>
 						}
-					/>
+					/> */}
 					<div className={classes.messageInputWrapper}>
 						<InputBase
 							inputRef={input => {
