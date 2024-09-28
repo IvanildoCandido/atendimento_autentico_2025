@@ -1,0 +1,62 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Logs
+logs
+*.log
+logs/*
+*.log.*
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+jspm_packages/
+client/node_modules/
+server/node_modules/
+
+# Build files
+dist/
+build/
+.eslintcache
+
+# React
+*.env
+.env.*
+public/*.map
+.DS_Store
+.vscode/
+
+# Miscellaneous
+*.sublime-project
+*.sublime-workspace
+*.swo
+*.swp
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.tsbuildinfo
+
+# Tests
+coverage/
+*.lcov
+test-results/
+
+# Parcel-bundler cache (for projects that use it)
+.cache/
+
+# Editor directories and files
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
