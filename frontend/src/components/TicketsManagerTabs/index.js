@@ -14,12 +14,9 @@ import api from "../../services/api";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
-import PlaylistAddCheckOutlinedIcon from '@material-ui/icons/PlaylistAddCheckOutlined';
+import PlaylistAddCheckOutlinedIcon from "@material-ui/icons/PlaylistAddCheckOutlined";
 
-
-import {
-  Add as AddIcon,
-} from "@material-ui/icons";
+import { Add as AddIcon } from "@material-ui/icons";
 
 import NewTicketModal from "../NewTicketModal";
 import TicketsList from "../TicketsListCustom";
@@ -33,38 +30,37 @@ import { Button, Snackbar, IconButton } from "@material-ui/core";
 import { TagsFilter } from "../TagsFilter";
 import { UsersFilter } from "../UsersFilter";
 
-const useStyles = makeStyles(theme => ({
-	ticketsWrapper: {
-		position: "relative",
-		display: "flex",
-		height: "100%",
-		flexDirection: "column",
-		overflow: "hidden",
-		borderTopRightRadius: 0,
-		borderBottomRightRadius: 0,
-		borderRadius:0,
-	},
+const useStyles = makeStyles((theme) => ({
+  ticketsWrapper: {
+    position: "relative",
+    display: "flex",
+    height: "100%",
+    flexDirection: "column",
+    overflow: "hidden",
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    borderRadius: 0,
+  },
 
+  tabsHeader: {
+    flex: "none",
+    backgroundColor: theme.palette.tabHeaderBackground,
+  },
 
-	tabsHeader: {
-		flex: "none",
-		backgroundColor: theme.palette.tabHeaderBackground,
-	},
+  tabsInternal: {
+    flex: "none",
+    backgroundColor: theme.palette.tabHeaderBackground,
+  },
 
-	tabsInternal: {
-		flex: "none",
-		backgroundColor: theme.palette.tabHeaderBackground
-	},
-
-	settingsIcon: {
-		alignSelf: "center",
-		marginLeft: "auto",
-		padding: 8,
-	},
+  settingsIcon: {
+    alignSelf: "center",
+    marginLeft: "auto",
+    padding: 8,
+  },
   snackbar: {
     display: "flex",
     justifyContent: "space-between",
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: "red",
     color: "white",
     borderRadius: 30,
     [theme.breakpoints.down("sm")]: {
@@ -103,102 +99,101 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 30,
   },
 
-	tab: {
-		minWidth: 120,
-		width: 120,
-	},
+  tab: {
+    minWidth: 120,
+    width: 120,
+  },
 
-	internalTab: {
-		minWidth: 120,
-		width: 120,
-		padding: 5
-	},
+  internalTab: {
+    minWidth: 120,
+    width: 120,
+    padding: 5,
+  },
 
-	ticketOptionsBox: {
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-		background: theme.palette.optionsBackground,
-		padding: theme.spacing(1),
-	},
+  ticketOptionsBox: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    background: theme.palette.optionsBackground,
+    padding: theme.spacing(1),
+  },
 
-	ticketSearchLine: {
-		padding: theme.spacing(1),
-	},
+  ticketSearchLine: {
+    padding: theme.spacing(1),
+  },
 
-	serachInputWrapper: {
-		flex: 1,
-		background: theme.palette.total,
-		display: "flex",
-		borderRadius: 40,
-		padding: 4,
-		marginRight: theme.spacing(1),
-	},
+  serachInputWrapper: {
+    flex: 1,
+    background: theme.palette.total,
+    display: "flex",
+    borderRadius: 40,
+    padding: 4,
+    marginRight: theme.spacing(1),
+  },
 
-	searchIcon: {
-		color: "grey",
-		marginLeft: 6,
-		marginRight: 6,
-		alignSelf: "center",
-	},
+  searchIcon: {
+    color: "grey",
+    marginLeft: 6,
+    marginRight: 6,
+    alignSelf: "center",
+  },
 
-	searchInput: {
-		flex: 1,
-		border: "none",
-		borderRadius: 30,
-	},
+  searchInput: {
+    flex: 1,
+    border: "none",
+    borderRadius: 30,
+  },
 
-	insiderTabPanel: {
-		height: '100%',
-		marginTop: "-72px",
-		paddingTop: "72px"
-	},
+  insiderTabPanel: {
+    height: "100%",
+    marginTop: "-72px",
+    paddingTop: "72px",
+  },
 
-	insiderDoubleTabPanel: {
-		display:"flex",
-		flexDirection: "column",
-		marginTop: "-72px",
-		paddingTop: "72px",
-		height: "100%"
-	},
+  insiderDoubleTabPanel: {
+    display: "flex",
+    flexDirection: "column",
+    marginTop: "-72px",
+    paddingTop: "72px",
+    height: "100%",
+  },
 
-	labelContainer: {
-		width: "auto",
-		padding: 0
-	},
-	iconLabelWrapper: {
-		flexDirection: "row",
-		'& > *:first-child': {
-			marginBottom: '3px !important',
-			marginRight: 16
-		}
-	},
-	insiderTabLabel: {
-		[theme.breakpoints.down(1600)]: {
-			display:'none'
-		}
-	},
-	smallFormControl: {
-		'& .MuiOutlinedInput-input': {
-			padding: "12px 10px",
-		},
-		'& .MuiInputLabel-outlined': {
-			marginTop: "-6px"
-		}
-	}
+  labelContainer: {
+    width: "auto",
+    padding: 0,
+  },
+  iconLabelWrapper: {
+    flexDirection: "row",
+    "& > *:first-child": {
+      marginBottom: "3px !important",
+      marginRight: 16,
+    },
+  },
+  insiderTabLabel: {
+    [theme.breakpoints.down(1600)]: {
+      display: "none",
+    },
+  },
+  smallFormControl: {
+    "& .MuiOutlinedInput-input": {
+      padding: "12px 10px",
+    },
+    "& .MuiInputLabel-outlined": {
+      marginTop: "-6px",
+    },
+  },
 }));
 
 const TicketsManagerTabs = () => {
   const classes = useStyles();
   const history = useHistory();
-  
+
   const [isHoveredAll, setIsHoveredAll] = useState(false);
   const [isHoveredNew, setIsHoveredNew] = useState(false);
   const [isHoveredResolve, setIsHoveredResolve] = useState(false);
   const [isHoveredOpen, setIsHoveredOpen] = useState(false);
   const [isHoveredClosed, setIsHoveredClosed] = useState(false);
 
-  
   const [searchParam, setSearchParam] = useState("");
   const [tab, setTab] = useState("open");
   const [tabOpen, setTabOpen] = useState("open");
@@ -286,7 +281,6 @@ const TicketsManagerTabs = () => {
       });
 
       handleSnackbarClose();
-
     } catch (err) {
       console.log("Error: ", err);
     }
@@ -305,7 +299,6 @@ const TicketsManagerTabs = () => {
       <NewTicketModal
         modalOpen={newTicketModalOpen}
         onClose={(ticket) => {
-          
           handleCloseOrOpenTicket(ticket);
         }}
       />
@@ -401,7 +394,7 @@ const TicketsManagerTabs = () => {
                 <AddIcon className={classes.icon} />
               </IconButton>
             </Badge>
-			{user.profile === "admin" && (
+            {user.profile === "admin" && (
               <Badge
                 color="primary"
                 invisible={
@@ -420,10 +413,10 @@ const TicketsManagerTabs = () => {
                   className={classes.button}
                   onClick={handleSnackbarOpen}
                 >
-                  <PlaylistAddCheckOutlinedIcon style={{ color: "green" }} />
+                  <PlaylistAddCheckOutlinedIcon style={{ color: "red" }} />
                 </IconButton>
               </Badge>
-			   )}
+            )}
             <Can
               role={user.profile}
               perform="tickets-manager:showall"
