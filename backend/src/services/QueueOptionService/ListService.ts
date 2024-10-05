@@ -4,11 +4,14 @@ import QueueOption from "../../models/QueueOption";
 type QueueOptionFilter = {
   queueId: string | number;
   queueOptionId: string | number;
-  parentId: string | number | boolean;
+  parentId: number;
 };
 
-const ListService = async ({ queueId, queueOptionId, parentId }: QueueOptionFilter): Promise<QueueOption[]> => {
-
+const ListService = async ({
+  queueId,
+  queueOptionId,
+  parentId
+}: QueueOptionFilter): Promise<QueueOption[]> => {
   const whereOptions: WhereOptions = {};
 
   if (queueId) {

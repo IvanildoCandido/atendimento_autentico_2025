@@ -818,7 +818,7 @@ const messages = {
           color: "Cor",
           greeting: "Mensagem de saudação",
           actions: "Ações",
-          orderQueue: "Ordenação da Setor (bot)",
+          orderQueue: "Ordenação do Setor (bot)",
         },
         buttons: {
           add: "Adicionar Setor",
