@@ -20,7 +20,22 @@ type FilterList = {
 export const index = async (req: Request, res: Response): Promise<Response> => {
   const { queueId, queueOptionId, parentId } = req.query as FilterList;
 
-  const queueOptions = await ListService({ queueId, queueOptionId, parentId });
+  const parsedParentId =
+    typeof parentId === "number"
+      ? parentId
+      : typeof parentId === "string"
+      ? Number(parentId)
+      : null;
+
+  if (parsedParentId !== null && isNaN(parsedParentId)) {
+    throw new AppError("Invalid parentId. It must be a number.");
+  }
+
+  const queueOptions = await ListService({
+    queueId,
+    queueOptionId,
+    parentId: parsedParentId
+  });
 
   return res.json(queueOptions);
 };
@@ -45,7 +60,7 @@ export const update = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { queueOptionId } = req.params
+  const { queueOptionId } = req.params;
   const queueOptionData = req.body;
 
   const queueOption = await UpdateService(queueOptionId, queueOptionData);
@@ -57,7 +72,7 @@ export const remove = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { queueOptionId } = req.params
+  const { queueOptionId } = req.params;
 
   await DeleteService(queueOptionId);
 
