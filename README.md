@@ -19,4 +19,4 @@ npx sequelize db:migrate
 npx sequelize db:seed:all
 frontend
 npm install --force
-npm run build
+npm run build 
