@@ -25,7 +25,6 @@ build/
 .eslintcache
 
 # React
-.env
 public/*.map
 .DS_Store
 .vscode/
