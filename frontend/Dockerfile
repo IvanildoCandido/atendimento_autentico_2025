@@ -16,4 +16,5 @@ COPY add-env-vars.sh ./
 RUN chmod +x add-env-vars.sh
 RUN npm install express
 EXPOSE 3250
-CMD ["sh", "-c", "sh ./add-env-vars.sh && node server.js"]
+# CMD ["sh", "-c", "sh ./add-env-vars.sh && node server.js"]
+CMD ["sh", "-c", "node server.js"]

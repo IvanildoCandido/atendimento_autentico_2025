@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# Função para substituir variáveis
+# Funï¿½ï¿½o para substituir variï¿½veis
 _replaceBackendEnvVars() {
-    echo "Procurando arquivos contendo variáveis a serem substituídas..."
+    echo "Procurando arquivos contendo variaveis a serem substituidas..."
 
-    # Encontra todos os arquivos que contêm as variáveis ou URLs específicas
+    # Encontra todos os arquivos que contï¿½m as variï¿½veis ou URLs especï¿½ficas
     FILES=$(grep -rl "postgres_host_a_ser_mudado\|porta_postgres_a_ser_mudada\|usuario_postgres_a_ser_mudado\|senha_postgres_a_ser_mudada\|nome_postgres_a_ser_mudado\|fuso_horario_a_ser_mudado\|jwt_secreto_a_ser_mudado\|jwt_refresh_secreto_a_ser_mudado\|porta_backend_a_ser_mudada\|porta_proxy_a_ser_mudada\|https://api.example.com\|https://app.example.com\|chrome_args_a_ser_mudado\|redis_uri_a_ser_mudado\|redis_limiter_max_a_ser_mudado\|redis_limiter_duracao_a_ser_mudado\|gerencianet_sandbox_a_ser_mudado\|gerencianet_client_id_a_ser_mudado\|gerencianet_client_secret_a_ser_mudado\|gerencianet_pix_cert_a_ser_mudado\|gerencianet_pix_key_a_ser_mudado\|user_limit_a_ser_mudado\|connections_limit_a_ser_mudado\|closed_send_by_me_a_ser_mudado\|mail_host_a_ser_mudado\|mail_user_a_ser_mudado\|mail_pass_a_ser_mudado\|mail_from_a_ser_mudado\|mail_port_a_ser_mudado" /usr/src/app)
 
     if [ -z "$FILES" ]; then
-        echo "Nenhum arquivo contendo as ocorrências específicas encontrado."
+        echo "Nenhum arquivo contendo as ocorrï¿½ncias especificas encontrado."
         exit 1
     fi
 
-    # Escapar caracteres especiais nas variáveis de ambiente
+    # Escapar caracteres especiais nas variaveis de ambiente
     ESCAPED_DB_HOST=$(printf '%s\n' "$DB_HOST" | sed 's:[\\/&]:\\&:g')
     ESCAPED_DB_PORT=$(printf '%s\n' "$DB_PORT" | sed 's:[\\/&]:\\&:g')
     ESCAPED_DB_USER=$(printf '%s\n' "$DB_USER" | sed 's:[\\/&]:\\&:g')
@@ -46,7 +46,7 @@ _replaceBackendEnvVars() {
     for FILE in $FILES; do
         echo "Modificando $FILE..."
         
-        # Substituir as variáveis e URLs nos arquivos
+        # Substituir as variaveis e URLs nos arquivos
         sed -i "s/postgres_host_a_ser_mudado/${ESCAPED_DB_HOST}/g" "$FILE"
         sed -i "s/porta_postgres_a_ser_mudada/${ESCAPED_DB_PORT}/g" "$FILE"
         sed -i "s/usuario_postgres_a_ser_mudado/${ESCAPED_DB_USER}/g" "$FILE"
@@ -81,10 +81,10 @@ _replaceBackendEnvVars() {
     done
 }
 
-# Construir a URI de conexão
+# Construir a URI de conexï¿½o
 DB_URI="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
 
-# Função para verificar e aplicar seeds se necessário
+# Funcaoo para verificar e aplicar seeds se necessario
 _checkAndSeed() {
     # Verificar se a tabela SeedControl existe
     TABLE_EXISTS=$(psql ${DB_URI} -Atc "SELECT to_regclass('public.SeedControl');")
@@ -101,6 +101,6 @@ _checkAndSeed() {
     fi
 }
 
-# Executar funções
+# Executar funï¿½ï¿½es
 _replaceBackendEnvVars
 _checkAndSeed
